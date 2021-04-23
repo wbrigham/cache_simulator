@@ -4,19 +4,40 @@
 // methods will be labeled as integers 1 (LRU), 2 (LFRU), 3 (RR)
 class cache{
 
-  private:
+	private:
+		// lru data
+		int *lru;
 
-  public:
-    // constructor with replacement method and size
-    cache(int,bool);
+		// lfu data
+		int *lfu;
 
-    //default constructor
-    cache();
+		// rr data
+		int *rr;
 
-    // simulates cache access taking address and way of cache
-    void access(unsigned int, int);
+		// cache size
+		int size;
 
-    ~cache();
+		// misses counter
+		int misses;
+
+		// total number of times accessed
+		int toal;
+
+	public:
+    	//default constructor
+    	cache();
+		void init(int, bool);
+
+    	// simulates cache access taking address and way of cache
+    	void access(unsigned int, int);
+	
+		// reset cache
+		void reset();
+
+		// miss rate
+		double rate();
+
+    	~cache();
 };
 
 
