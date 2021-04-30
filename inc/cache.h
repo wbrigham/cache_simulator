@@ -1,43 +1,39 @@
-// Will Brigham and Zach Chua and Betty Hosler
+c// Will Brigham and Zach Chua and Betty Hosler
 // cache simulator
 
 // methods will be labeled as integers 1 (LRU), 2 (LFRU), 3 (RR)
 class cache{
-
-	private:
-		// lru data
-		int *lru;
-
-		// lfu data
-		int *lfu;
-
-		// rr data
-		int *rr;
-
-		// cache size
-		int size;
-
-		// misses counter
-		int misses;
-
-		// total number of times accessed
-		int toal;
-
-	public:
-    	//default constructor
-    	cache();
-		void init(int, bool);
-
-    	// simulates cache access taking address and way of cache
-    	void access(unsigned int, int);
+public:
+	cache(int,bool);
 	
-		// reset cache
-		void reset();
+	cache();
+	void init(int,bool);
+	
+	void reset();
+	
+	void access(unsigned int,int);
+	
+	double rate();
 
-		// miss rate
-		double rate();
+	~cache();
 
-    	~cache();
+private:
+	bool *valid;
+	
+	int *tag;
+	
+	int *lru;
+	
+	bool replacement_method;
+
+	int size;
+	
+	int misses;
+	
+	int total;
+
+	int find_tag(int,int,int);
+	
+	int lru_offset(int,int);
+	
 };
-
-
