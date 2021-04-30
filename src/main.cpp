@@ -54,25 +54,6 @@ int main(int argc,char **argv)
 			caches[i].access(read,(int)pow(2,(i/5))%16+(int)pow(2,(i/5))/16);
 	}
 
-	// print title nicely
-	printf("%25s\n\n%14d%10d%10d%10d%11d\n","LRU",1024,2048,4096,8192,16384);
-
-	// print a the first half of the table, one line at a time
-	for(i=0;i<4;++i)
-	{
-		printf("%-10d%-10.2f%-10.2f%-10.2f%-10.2f%-10.2f\n",(int)pow(2,i),caches[5*i].rate(),caches[5*i+1].rate(),
-		caches[5*i+2].rate(),caches[5*i+3].rate(),caches[5*i+4].rate());
-	}
-
-	// FIFO title
-	printf("\n%26s\n\n%14d%10d%10d%10d%11d\n","FIFO",1024,2048,4096,8192,16384);
-
-	// print second half, one line at a time
-	for(i=4;i<8;++i)
-	{
-		printf("%-10d%-10.2f%-10.2f%-10.2f%-10.2f%-10.2f\n",(int)pow(2,i%4),caches[5*i].rate(),caches[5*i+1].rate(),
-		caches[5*i+2].rate(),caches[5*i+3].rate(),caches[5*i+4].rate());
-	}
 
 	// close input file
 	infile.close();
