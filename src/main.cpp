@@ -18,19 +18,12 @@
 
 int main(int argc,char **argv)
 {
-	// if fine name isn't passed in
 	if(argc != 2)
 	{
 		// print error and quit
-		cout << "Usage: as3 input_file\n";
+		cout << "Usage: Invalid File\n";
 		return 0;
 	}
-
-	cout << "Execution will take about 20 seconds, please wait...\n";
-
-
-	// for loop counter
-	int i;
 
 	// the input file
 	ifstream infile(argv[1]);
@@ -42,8 +35,7 @@ int main(int argc,char **argv)
 	block caches[NUM_CACHES];
 
 	// initialize the caches to have varying sizes and replacement policies
-	for(i=0;i<NUM_CACHES;++i)
-		caches[i].init(64*(int)pow(2,i%5),(i>19));
+	for(int i=0;i<NUM_CACHES;++i)
 
 	// while there is data to be read
 	while(infile >> read)
@@ -51,7 +43,6 @@ int main(int argc,char **argv)
 		// put the data in each cache, and set the "way" assiciativity different
 		// for each
 		for(i=0;i<NUM_CACHES;++i)
-			caches[i].access(read,(int)pow(2,(i/5))%16+(int)pow(2,(i/5))/16);
 	}
 
 
