@@ -8,26 +8,24 @@ struct Node {
 };
 struct Node* head = NULL;
 int counter = 0;
-void deleteNode(Node** head_ref, Node* del) {
-   if (*head_ref == NULL || del == NULL) {
-      return;
-   }
-   if (*head_ref == del) {
-      *head_ref = del->next;
-   }
-   if (del->next != NULL) {
-      del->next->prev = del->prev;
-   }
-   if (del->prev != NULL) {
-      del->prev->next = del->next;
-   }
-   free(del);
-   return;
+void deleteNode() {
+      if(head != NULL) {
+        if(head->next == NULL) {
+          head = NULL;
+        } else {
+          Node* temp = head;
+          while(temp->next->next != NULL)
+            temp = temp->next;
+          Node* lastNode = temp->next;
+          temp->next = NULL;
+          free(lastNode); 
+        }
+      }
 }
 void insert(int newdata, const char* read) {
 	if(read == "W"){
 		if(counter == 8){
-			deleteNode(&head,head->next);
+			deleteNode();
 		} 		
 		else{
 			struct Node* newnode = (struct Node*)malloc(sizeof(struct Node));
