@@ -21,15 +21,15 @@ void readFile(std::ifstream& in_file)
 		counter++;
 		if (counter % 2 == 0) {
 			if (cmd.compare("W") == 0) {
-				cache.write(hex);
+				write(hex);
 			}
 			else {
-				cache.read(hex);
+				read(hex);
 			}
 		}
 	}
-	std::cout << "Hits: " << cache.getHits() << std::endl;
-	std::cout << "Misses: " << cache.getMisses() << std::endl;
+	std::cout << "Hits: " << getHits() << std::endl;
+	std::cout << "Misses: " << getMisses() << std::endl;
 }
 
 int main(int argc, char** argv)

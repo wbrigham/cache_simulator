@@ -1,19 +1,10 @@
+#include "../inc/LRUCache.h"
 #include <iostream>
 #include <stdlib.h>
 #include <bits/stdc++.h>
-using namespace std;
-struct Node {
-	long unsigned int data;
-	struct Node *prev;
-	struct Node *next;
-};
-struct Node* head = NULL;
-int counter = 0;
-int hit = 0;
-int miss = 0;
-int track = 0;
 
-void deleteHit(Node *head, int n){
+LRUCache::LRUCache{}
+void LRUCache::deleteHit(Node *head, int n){
 	Node* ptr;
 	ptr = head;
 	for(int i = 0; i < n; i++){
@@ -25,22 +16,20 @@ void deleteHit(Node *head, int n){
     while(prev->next != NULL && prev->next != del) 
         prev = prev->next; 
   
-    // Check if node really exists in Linked List 
     if(prev->next == NULL) 
     { 
         cout << "\nGiven node is not present in Linked List"; 
         return; 
     } 
   
-    // Remove node from Linked List 
     prev->next = prev->next->next; 
   
-    // Free memory 
     free(del); 
   
     return; 
 } 	
-void deleteNode() {
+
+void LRUCache::deleteNode() {
       if(head != NULL) {
         if(head->next == NULL) {
           head = NULL;
@@ -54,7 +43,8 @@ void deleteNode() {
         }
       }
 }
-void insert(long unsigned int newdata, const char* read) {
+
+void LRUCache::write(long unsigned int newdata) {
 	if(read == "W"){
 		if(counter == 8){
 			deleteNode();
@@ -79,28 +69,28 @@ void insert(long unsigned int newdata, const char* read) {
 			counter++;
 		}
 	}
-	else if(read == "R"){
-		struct Node* ptr;
-		ptr = head;
-		while(ptr != NULL){
-			if(newdata == ptr->data){
-				hit++;
-				deleteHit(head, track);
-				insert(newdata, "W");
-				break;		
-			}
-			else{
-				ptr = ptr->next;
-			}
-			track++;
+}
+void LRUCache::read(long unsigned int newdata){
+	struct Node* ptr;
+	ptr = head;
+	while(ptr != NULL){
+		if(newdata == ptr->data){
+			hit++;
+			deleteHit(head, track);
+			insert(newdata, "W");
+			break;		
 		}
-		if(ptr == NULL){
-			miss++;
+		else{
+			ptr = ptr->next;
 		}
+		track++;
+	}
+	if(ptr == NULL){
+		miss++;
 	}
 }
   
-void display() {
+void LRUCache::display() {
 	struct Node* ptr;
 	ptr = head;
 	while(ptr != NULL) {
@@ -108,23 +98,15 @@ void display() {
     	ptr = ptr->next;
     }
 }
-int main() {
-	insert(4, "W");
-	insert(3, "W");
-	insert(7, "W");
-	insert(3, "R");
-	/*insert(1, "W");
-	insert(7, "W");
-	insert(2, "W");
-	insert(9, "W");
-	insert(3, "W");
-	insert(1, "W");
-	insert(7, "W");
-	insert(2, "W");
-	insert(3, "W");
-	insert(3,"R");*/
-	cout<<"The doubly linked list is: \n";
-	display();
-	cout<< "\n" ;
-	return 0;
+
+void LRUCache::updateHits(){
+	hit++;
 }
+
+void LRUCache::updateMisses(){
+	miss++;
+}
+
+int LRUCache::getHits() const {return hit;}
+
+int LRUCache::getMisses() const {return miss;}
