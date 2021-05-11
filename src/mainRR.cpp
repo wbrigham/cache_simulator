@@ -10,7 +10,7 @@ void readFile(std::ifstream& in_file)
 	std::string cmd;
 	long unsigned int hex;
 	int counter = 0;
-	RRCache cache(10);
+	RRCache cache(1);
 	while (in_file >> input) {
 		if (input.length() == 1) {
 			cmd = input;
@@ -27,7 +27,10 @@ void readFile(std::ifstream& in_file)
 				cache.read(hex);
 			}
 		}
+		std::cout << std::endl;
+		cache.printCache();
 	}
+	
 	std::cout << "Hits: " << cache.getHits() << std::endl;
 	std::cout << "Misses: " << cache.getMisses() << std::endl;
 }

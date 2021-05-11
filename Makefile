@@ -21,10 +21,10 @@ initialize:
 $(OBJ)/RRCache.o: $(SRC)/RRCache.cpp
 	$(PP) $(CXXFLAGS) -c $(SRC)/RRCache.cpp -o $@
 
-$(OBJ)/main.o: $(SRC)/main.cpp
-	$(PP) $(CXXFLAGS) -c $(SRC)/main.cpp -o $@
+$(OBJ)/mainRR.o: $(SRC)/mainRR.cpp
+	$(PP) $(CXXFLAGS) -c $(SRC)/mainRR.cpp -o $@
 
-mainObjs := $(OBJ)/RRCache.o $(OBJ)/main.o
+mainObjs := $(OBJ)/RRCache.o $(OBJ)/mainRR.o
 
 main: $(mainObjs)
 	$(PP) $(CXXFLAGS) -o $(EXE)/main $(mainObjs)

@@ -1,9 +1,9 @@
 #include "../inc/RRCache.h"
 
-RRCache::RRCache(size_t Size) : cache(std::vector<long unsigned int>(Size)), size(Size), hit(0), miss(0) {}
+RRCache::RRCache(size_t Size) : cache(std::vector<long unsigned int>(0)), size(Size), hit(0), miss(0) {}
 
 bool RRCache::isFull() const {
-	if (cache.size() > size)
+	if (cache.size() >= size)
 		return true;
 	else
 		return false;
