@@ -2,7 +2,7 @@
 PP := g++
 
 # CXXFLAGS flags
-FLAGS := -O0 -g -Wall -Wextra -Wconversion -Wshadow -pedantic -Werror
+FLAGS := -O0 -g -Wall -Wextra -Wconversion -Wshadow -pedantic -Werror -lm
 CXXFLAGS := -m64 -std=c++11 -Weffc++ $(FLAGS)
 
 # Variables for Folders
@@ -11,26 +11,23 @@ SRC := src
 EXE := exe
 OBJ := obj
 
-# make clean
-clean :
+# make initialize
+initialize:
 	rm -rf $(OBJ)/* $(EXE)/*
-
-# Command: make cache
-cacheObjs := $(OBJ)/cache.o
-
-cache: $(cacheObjs)
-	$(PP) $(CXXFLAGS) -o $(EXE)/cache $(cacheObjs)
-
-$(OBJ)/cache.o: $(SRC)/cache.cpp
-	$(PP) $(CXXFLAGS) -c $(SRC)/cache.cpp -o $@
+	mkdir $(OBJ) $(EXE)
 
 # Command: make main
 
-mainObjs := $(OBJ)/main.o
-
-main: $(mainObjs)
-	$(PP) $(CXXFLAGS) -o $(EXE)/main $(mainObjs)
+$(OBJ)/RRCache.o: $(SRC)/RRCache.cpp
+	$(PP) $(CXXFLAGS) -c $(SRC)/RRCache.cpp -o $@
 
 $(OBJ)/main.o: $(SRC)/main.cpp
 	$(PP) $(CXXFLAGS) -c $(SRC)/main.cpp -o $@
 
+mainObjs := $(OBJ)/RRCache.o $(OBJ)/main.o
+
+main: $(mainObjs)
+	$(PP) $(CXXFLAGS) -o $(EXE)/main $(mainObjs)
+
+clean:
+	rm -rf $(OBJ)/* $(EXE)/*
