@@ -2,11 +2,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
-
-void sendToCache(std::string cmd, long unsigned int hex)
-{
-	std::cout << cmd << " " << hex << std::endl;
-}
+#include "../inc/RRCache.h"
 
 void readFile(std::ifstream& in_file)
 {
@@ -14,6 +10,7 @@ void readFile(std::ifstream& in_file)
 	std::string cmd;
 	long unsigned int hex;
 	int counter = 0;
+	RRCache cache(10);
 	while (in_file >> input) {
 		if (input.length() == 1) {
 			cmd = input;
@@ -23,9 +20,16 @@ void readFile(std::ifstream& in_file)
 		}
 		counter++;
 		if (counter % 2 == 0) {
-			sendToCache(cmd, hex);
+			if (cmd.compare("W") == 0) {
+				cache.write(hex);
+			}
+			else {
+				cache.read(hex);
+			}
 		}
 	}
+	std::cout << "Hits: " << cache.getHits() << std::endl;
+	std::cout << "Misses: " << cache.getMisses() << std::endl;
 }
 
 int main(int argc, char** argv)
