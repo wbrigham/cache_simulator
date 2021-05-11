@@ -26,7 +26,7 @@ class LRUCache
 		
 	
 	public:
-		LRUCache(size_t Size);
+		LRUCache();
 		
 		void deleteHit(Node* head, int n);
 		void deleteNode();
