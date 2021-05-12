@@ -11,26 +11,24 @@ SRC := src
 EXE := exe
 OBJ := obj
 
-# make clean
-clean :
-	rm -rf $(OBJ)/* $(EXE)/*
-
-# Command: make cache
-cacheObjs := $(OBJ)/cache.o
-
-cache: $(cacheObjs)
-	$(PP) $(CXXFLAGS) -o $(EXE)/cache $(cacheObjs)
-
-$(OBJ)/cache.o: $(SRC)/cache.cpp
-	$(PP) $(CXXFLAGS) -c $(SRC)/cache.cpp -o $@
-
 # Command: make main
 
-mainObjs := $(OBJ)/main.o
+$(OBJ)/Node.o: $(SRC)/Node.cpp
+	$(PP) $(CXXFLAGS) -c $(SRC)/Node.cpp -o $@
+
+$(OBJ)/DDList.o: $(SRC)/DDList.cpp
+	$(PP) $(CXXFLAGS) -c $(SRC)/DDList.cpp -o $@
+
+$(OBJ)/LFUCache.o: $(SRC)/LFUCache.cpp
+	$(PP) $(CXXFLAGS) -c $(SRC)/LFUCache.cpp -o $@
+
+$(OBJ)/mainLFU.o: $(SRC)/mainLFU.cpp
+	$(PP) $(CXXFLAGS) -c $(SRC)/mainLFU.cpp -o $@
+
+mainObjs := $(OBJ)/Node.o $(OBJ)/DDList.o $(OBJ)/LFUCache.o $(OBJ)/mainLFU.o
 
 main: $(mainObjs)
 	$(PP) $(CXXFLAGS) -o $(EXE)/main $(mainObjs)
 
-$(OBJ)/main.o: $(SRC)/main.cpp
-	$(PP) $(CXXFLAGS) -c $(SRC)/main.cpp -o $@
-
+clean:
+	rm -rf $(OBJ)/* $(EXE)/*
