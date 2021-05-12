@@ -6,11 +6,11 @@
 
 void readFile(std::ifstream& in_file)
 {
+	LRUCache c;
 	std::string input;
 	std::string cmd;
 	long unsigned int hex;
 	int counter = 0;
-	LRUCache cache(10);
 	while (in_file >> input) {
 		if (input.length() == 1) {
 			cmd = input;
@@ -21,15 +21,15 @@ void readFile(std::ifstream& in_file)
 		counter++;
 		if (counter % 2 == 0) {
 			if (cmd.compare("W") == 0) {
-				write(hex);
+				c.write(hex);
 			}
 			else {
-				read(hex);
+				c.read(hex);
 			}
 		}
 	}
-	std::cout << "Hits: " << getHits() << std::endl;
-	std::cout << "Misses: " << getMisses() << std::endl;
+	std::cout << "Hits: " << c.getHits() << std::endl;
+	std::cout << "Misses: " << c.getMisses() << std::endl;
 }
 
 int main(int argc, char** argv)
