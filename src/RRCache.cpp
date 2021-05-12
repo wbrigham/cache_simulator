@@ -1,6 +1,8 @@
 #include "../inc/RRCache.h"
 
-RRCache::RRCache(size_t Size) : cache(std::vector<long unsigned int>(0)), size(Size), hit(0), miss(0) {}
+RRCache::RRCache(size_t Size) : cache(std::vector<long unsigned int>(0)), size(Size), hit(0), miss(0) {
+	srand((unsigned) time(0));	
+}
 
 bool RRCache::isFull() const {
 	if (cache.size() >= size)
@@ -10,7 +12,6 @@ bool RRCache::isFull() const {
 }
 
 long unsigned int RRCache::randomDelete() const {
-	srand((unsigned) time(0));
 	return rand() % cache.size();
 }
 
