@@ -1,4 +1,5 @@
 #include "../inc/LRUCache.h"
+#include "../inc/Node.h"
 
 #include <iostream>
 #include <stdlib.h>
@@ -6,9 +7,9 @@
 
 LRUCache::LRUCache(){}
 
-void LRUCache::deleteHit(Node *head, int n){
+void LRUCache::deleteHit(Node *find, int n){
 	Node* ptr;
-	ptr = head;
+	ptr = find;
 	for(int i = 0; i < n; i++){
 		ptr = head->next;
 		i++;
@@ -20,7 +21,6 @@ void LRUCache::deleteHit(Node *head, int n){
   
     if(prev->next == NULL) 
     { 
-        std::cout << "\nGiven node is not present in Linked List"; 
         return; 
     } 
   
@@ -47,7 +47,7 @@ void LRUCache::deleteNode() {
 }
 
 void LRUCache::write(long unsigned int newdata) {
-		if(counter == 8){
+		if(counter == 1000){
 			deleteNode();
 			struct Node* newnode = (struct Node*)malloc(sizeof(struct Node));
 			newnode->data = newdata;
@@ -90,14 +90,6 @@ void LRUCache::read(long unsigned int newdata){
 	}
 }
   
-/*void LRUCache::display() {
-	struct Node* ptr;
-	ptr = head;
-	while(ptr != NULL) {
-    	cout<< ptr->data <<" ";
-    	ptr = ptr->next;
-    }
-}*/
 
 void LRUCache::updateHits(){
 	hit++;

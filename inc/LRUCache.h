@@ -5,15 +5,18 @@
 #include <iostream>
 #include <ctime>
 #include <vector>
+#include "Node.h"
 
 
-struct Node {
+/*struct Node {
 	long unsigned int data;
 	struct Node *prev;
 	struct Node *next;
 };
 
-struct Node* head = NULL;
+
+struct Node* head = NULL;*/
+
 class LRUCache
 {
 	private:
@@ -21,6 +24,7 @@ class LRUCache
 		int miss = 0;
 		int counter = 0;
 		int track = 0;
+		struct Node *head = NULL;
 		
 	
 	public:
@@ -28,8 +32,8 @@ class LRUCache
 		
 		void updateHits();
 		void updateMisses();
-		void deleteHit(Node* head, int n);
 		void deleteNode();
+		void deleteHit(Node *find, int n);
 		int getHits() const;
 		int getMisses() const;
 		void write(long unsigned int data);
